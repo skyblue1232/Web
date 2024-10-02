@@ -1,0 +1,99 @@
+.App {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.app-header {
+  background-color: #7eb3a3;
+  padding: 40px 20px;
+  text-align: left;
+}
+
+.header-content {
+  display: flex; 
+  justify-content: left; 
+  align-items: left; 
+  gap: 10px; 
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  margin-left: 20px; 
+}
+
+.title {
+  font-size: 48px;
+  color: #2665f7;
+  margin: 0;
+  font-weight: bold;
+}
+
+.underline {
+  border-bottom: 1px solid #f7f8e9; 
+  padding-bottom: 5px; 
+}
+
+.logo {
+  width: 120px; 
+  height: auto;
+  margin-right: 10px; 
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #cee5f0;
+  margin-top: 10px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.info {
+  text-align: left;
+  margin-right: 50px;
+}
+
+.info p {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* 구분선 스타일 */
+.divider {
+  border: none;
+  height: 2px;
+  background-color: #eaeaea;
+  margin: 20px auto;
+  width: 90%;
+}
+
+/* 영화 목록의 메인 섹션 */
+main {
+  padding: 20px;
+}
+
+/* 푸터 스타일 */
+.app-footer {
+  background-color: #7eb3a3;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.app-footer p {
+  margin: 0;
+  font-size: 14px;
+}
