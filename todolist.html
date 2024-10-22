@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      background-color:skyblue;
+    }
+    h1{
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    hr{
+      width:90%;
+      
+    }
+    .input{
+      display:flex;
+      justify-content: center;
+      margin:auto;
+      padding:15px;
+      width: 80%;
+    }
+    .list{
+      display:flex;
+      justify-content:space-around;
+      width:100%;
+      margin-top: 30px;
+    }
+    .list .go, .list .done{
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .list .goTitle, .list .doneTitle{
+      border-bottom: 5px solid honeydew;
+      font-weight: bold;
+    }
+    .list button{
+      border:none;
+      background-color: rgb(255, 247, 200);
+      font-weight: bold;
+      margin-left: 10px;
+      padding: 5px;
+    }
+    .list li{
+      display:flex;
+      justify-content: space-between;
+      text-align: center;
+      font-weight:bold;
+      width:auto;
+      margin:8px;
+      padding:6px;
+      border-bottom: 3px solid honeydew;
+    }
+  </style>
+</head>
+
+<body>
+  <div class = "title">
+    <h1>UMC Study Plan</h1>
+    <hr>
+  </div>  
+  <!-- 계획 입력 -->
+  <form action="#" class="addTodo" onsubmit="return addActiveList();">
+    <input type="text" class="input" placeholder="스터디 계획을 작성해보세요!">
+  </form>
+ 
+  <div class="list">
+     <!-- 해야할 일 리스트 -->
+     <div class="go">
+      <div class="goTitle">해야할 일</div>
+      <ul type="none" class="listGo">
+      </ul>
+    </div>
+
+    <!-- 해낸 일 리스트 -->
+    <div class="done">
+      <div class="doneTitle">해낸 일</div>
+      <ul type="none" class="listDone">
+      </ul>
+    </div>
+    
+  </div>
+  
+</body>
+<script>
+  let i=j=0;
+
+  //해야할 일 추가 함수
+  function addActiveList() {
+    //해야할 일 입력값 가져오기
+    let todo = document.querySelector(".input").value;
+    //해야할 일 리스트 목록 만들기 & 완료버튼 추가
+    let li = document.createElement("li");
+    let button = document.createElement("button");
+    button.className = "doneBtn" + i;
+    li.innerHTML = todo; //li에 todo를 html로 넣기
+    button.innerHTML = "완료"; //완료버튼
+    //자식노드추가 -> li에 버튼 붙이기
+    li.appendChild(button);
+    document.querySelector(".listGo").appendChild(li);//리스트에 붙여서 완성된 해야할 일 넣기
+    document.querySelector(".doneBtn"+i).addEventListener('click', doneActive); // 방금 넣은 할일 버튼 클릭하면 완료 함수 실행
+    document.querySelector(".input").value = ''; //input text에 입력했던 것 없애기
+    i++; //다음 클래스명 번호 1추가
+    return false;
+  }
+  //해낸 일 함수
+  function doneActive() {
+    let content = this.parentNode; //this==완료된 , parentNode=li태그
+    this.innerHTML = "삭제"; //this 안에 html을 '삭제'로
+    this.className = "deleteBtn" + j; //버튼 클래스이름 다
+    document.querySelector(".deleteBtn"+j).addEventListener('click', deleteDone);
+    j++; //완료 버튼 누를 시 삭제 함수 실행되게..
+    document.querySelector(".listDone").appendChild(content);
+  }
+  //해낸 일 삭제 함수
+  function deleteDone() {
+    this.parentNode.parentNode.removeChild(this.parentNode);
+    //this의 부모노드의 부모노드인 ul태그 안에 있는 this의 부모 노드를 지움(this의 li태그) 이거 진짜햄들다
+  }
+
+</script>
+</html>

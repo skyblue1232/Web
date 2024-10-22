@@ -1,0 +1,36 @@
+.todo-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.result{
+  margin:2px 3px;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 100px;
+  background-color: red;
+  color: white;
+}
+button {
+  margin:2px 3px;
+  padding: 10px 10px;
+  border: none;
+  border-radius: 40px;
+  background-color: yellowgreen;
+  color: white;
+  cursor: pointer;
+}
+
+input{
+  border-radius: 20px;
+  margin: auto;
+}
+
+button:hover {
+  background-color: green;
+}

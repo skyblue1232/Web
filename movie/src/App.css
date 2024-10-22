@@ -1,0 +1,49 @@
+h1.title{
+  font-size:50px;
+  font-weight:bold;
+  color: #333;
+  text-align:center;
+  margin-bottom: 20px;
+}
+hr{
+  width:90%;
+}
+.movieList {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 10px; 
+  padding: 20px;
+}
+
+.movie-item {
+  position: relative; 
+  width: calc(10% - 10px); /* 10개씩 보이도록 설정 !! */
+  overflow: hidden; 
+}
+
+h2{
+  color:white;
+}
+
+.movie-item img {
+  width: 100%; 
+  height: auto; 
+  border-radius: 10px;
+}
+
+.overlay {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5); 
+  opacity: 0; 
+}
+
+.movie-item:hover .overlay {
+  opacity: 1;
+}
+
