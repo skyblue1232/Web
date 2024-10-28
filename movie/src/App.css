@@ -11,7 +11,7 @@
   background-color: #000; /* 맨 위 칸 배경 검정색 */
   padding: 40px 20px;
   text-align: left;
-}
+} 
 
 .header-content {
   display: flex; 

@@ -11,7 +11,7 @@ export const MOVIES = {
       "genre_ids": [
         28,
         878,
-        27
+        27 
       ],
       "id": 615656,
       "original_language": "en",

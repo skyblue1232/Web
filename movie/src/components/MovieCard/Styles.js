@@ -18,7 +18,7 @@ export const Poster = styled.img`
   margin-bottom: 10px;
 `;
 
-export const Info = styled.div`
+export const Info = styled.div` 
   display: flex;
   flex-direction: column;
 `;
