@@ -5,12 +5,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MovieList from './components/MovieList/MovieList';  // MovieList 컴포넌트 위치
 import './App.css';
 
-function App() { 
+function App() {
   return (
     <Router>
       <div className="App">
         {/* <Navbar /> */}
- 
+
         <header className="app-header">
           <div className="header-content">
             <img src="/umc_logo.png" className="logo" alt="UMC Logo" />

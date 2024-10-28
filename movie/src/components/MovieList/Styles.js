@@ -10,6 +10,6 @@ export const MovieListContainer = styled.div`
 export const Message = styled.p`
   grid-column: 1 / -1;
   text-align: center;
-  font-size: 1.2em; 
+  font-size: 1.2em;
   color: #666;
 `;

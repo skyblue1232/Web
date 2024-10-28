@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MovieCard from '../MovieCard/MovieCard';
 import * as S from './Styles'; 
 
-const MovieList = ({ category }) => { 
+const MovieList = ({ category }) => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
