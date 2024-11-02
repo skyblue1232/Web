@@ -1,0 +1,119 @@
+.sidebar {
+  width: 200px;
+  position: fixed;
+  top: 170px;
+  left: -210px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: #575555;
+  transition: left 0.3s ease;
+}
+
+.sidebar.visible {
+  left: 0;
+}
+
+.sidebar button {
+  margin: 10px 0; 
+  padding: 10px;
+  width: 150px;
+  cursor: pointer;
+}
+
+.search-container {
+  position: relative;
+  width: 130px;
+}
+
+.search-box {
+  margin-top: 10px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 0.2px ridge #4f4e4e;
+  background-color: #575555;
+  border-radius: 4px;
+}
+
+.search-results {
+  font-size: 0.9em;
+  width: 270px;
+  color: #647b7d;
+}
+
+.movie-container {
+  position: relative;
+  width: 100px;
+}
+
+.movie-dropdown {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  background-color: #373030;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 1px;
+}
+
+.movie-dropdown button {
+  background: grey;
+  border: 0.5px;
+  padding: 10px;
+  cursor: pointer;
+  text-align: left;
+  width: 200px;
+}
+
+.movie-dropdown button:hover {
+  background-color: #e0e0e0;
+}
+
+.movie-container {
+  position: relative;
+}
+
+.movie-dropdown {
+  position: relative;
+  margin-top: 0.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5px; /* 버튼 간 간격 추가 */
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1px 0;
+  width: 120px; /* 버튼 크기에 맞추어 동일한 너비 */
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+}
+
+.movie-container:hover .movie-dropdown {
+  max-height: 130px;
+  opacity: 1;
+}
+
+.movie-dropdown button {
+  padding: 5px;
+  text-align: left;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+}
+
+.movie-dropdown button:hover {
+  background-color: #e0e0e0;
+}
+

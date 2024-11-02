@@ -57,7 +57,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   padding: 15px;
-  background-color: #666; 
+  background-color: black; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
 }
@@ -75,7 +75,7 @@
 
 /* 새로운 Navbar 스타일 */
 .navbar {
-  background-color: #444; /* Navbar 배경 */
+  background-color: #090000; /* Navbar 배경 */
   color: #f4f4f4;
   padding: 15px 20px;
   text-align: left;

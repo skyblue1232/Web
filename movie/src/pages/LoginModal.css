@@ -1,0 +1,66 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 1000; 
+}
+
+.modal-content {
+  background: rgb(147, 121, 121);
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  max-width: 90vw; 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  overflow: hidden; 
+  position: relative;
+}
+
+.input-field {
+  margin-bottom: 15px;
+}
+
+.input-error {
+  border: 1px solid #ff4d4f;
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 0.875rem;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: pink;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-btn.disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+.close-btn {
+  margin-top: 10px;
+  background: #ddd;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
