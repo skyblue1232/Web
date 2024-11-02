@@ -1,0 +1,44 @@
+.movie-card {
+  position: relative;
+  width: 200px;
+  cursor: pointer;
+}
+
+.movie-poster {
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease;
+  object-fit: cover;
+}
+
+.movie-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  align-items: center;
+  color: white;
+  text-align: start;
+  padding: 20px 15px;
+  transition: opacity 0.3s ease;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.movie-card:hover .movie-overlay {
+  opacity: 1;
+}
+
+.movie-overlay h3, .movie-overlay p {
+  margin: 0;
+}
+
+.movie-overlay p {
+  max-height: 150px; 
+}
