@@ -1,57 +1,47 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Navbar from './components/Navbar/Navbar';  
-import Sidebar from './components/Sidebar/Sidebar'; 
-import MovieList from './pages/MovieList/MovieList';  
-import RecommendedMovies from './pages/Recommend/RecommendedMovies';
-import LatestMovies from './components/LatestMovies/LatestMovies';
-import TheaterMovies from './components/TheaterMovies/TheaterMovies';
-import LoginModal from './pages/LoginModal';
-import SignupModal from './pages/SignupModal';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import Navbar from './components/Navbar';  // Navbar 컴포넌트를 추가했다고 가정
+// import Sidebar from './components/Sidebar';  // Sidebar 컴포넌트를 추가했다고 가정
+import MovieList from './components/MovieList/MovieList';  // MovieList 컴포넌트 위치
 import './App.css';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태
-  const [isSignedUp, setIsSignedUp] = useState(false); // 회원가입 상태
-
-  // 로그인 핸들러
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  // 회원가입 핸들러
-  const handleSignup = () => {
-    setIsSignedUp(true);
-  };
-
   return (
     <Router>
       <div className="App">
-        <Navbar />
-        <div className="content-wrapper">
-          <Sidebar />
+        {/* <Navbar /> */}
+
+        <header className="app-header">
+          <div className="header-content">
+            <img src="/umc_logo.png" className="logo" alt="UMC Logo" />
+            <div className="text-content">
+              <h1 className="title">
+                <span className="underline">YoungHwa</span>
+              </h1>
+              <p className="subtitle">Umc Movie</p>
+            </div>
+          </div>
+        </header>
+      
+        <div className="header-container">
+          <div className="info">
+            <p>주최: umc</p>
+            <p>모방: umc</p>
+            <p>기획: umc</p>
+          </div>
+        </div>
+
+        <hr className="divider" />
+        
+        <div className="content">
+          {/* <Sidebar /> */}
           <main className="main-content">
             <Routes>
               <Route path="/" element={<MovieList />} />
-              <Route path="/recommended" element={<RecommendedMovies />} />
-              <Route path="/latest" element={<LatestMovies />} />
-              <Route path="/theater" element={<TheaterMovies />} />
-
-              <Route
-                path="/login"
-                element={
-                  isLoggedIn ? <Navigate to="/" /> : <LoginModal onLogin={handleLogin} />
-                }
-              />
-              <Route
-                path="/signup"
-                element={
-                  isSignedUp ? <Navigate to="/" /> : <SignupModal closeModal={handleSignup} />
-                }
-              />
             </Routes>
           </main>
         </div>
+
         <footer className="app-footer">
           <p>© 2024 영화는 영화관에서 | 모든 권한이 umc에는 없습니다.</p>
         </footer>

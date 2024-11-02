@@ -7,17 +7,18 @@ const MovieList = ({ category }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // 유효한 category 값 확인
   const validCategories = ['now_playing', 'popular', 'top_rated', 'upcoming'];
   const selectedCategory = validCategories.includes(category) ? category : 'popular';
 
-  useEffect(() => { // useEffect 훅을 사용하여 selectedCategory가 변경될 때마다 API 요청 
+  useEffect(() => {
     const fetchMovies = async () => {
       setLoading(true);
       setError(null);
 
+      // 요청 URL 설정
       const url = `https://api.themoviedb.org/3/movie/${selectedCategory}?language=ko-KR`;
-      console.log("Fetching movies from:", url); 
-
+      console.log("Fetching movies from:", url); // 요청 URL 출력
 
       try {
         const response = await fetch(url, {
