@@ -1,7 +1,7 @@
 /* 기존 스타일 */
 .App {
   font-family: 'Arial', sans-serif;
-  background-color: #333; /* 전체 페이지 배경 검정색 */
+  background-color: #000; /* 전체 페이지 배경 검정색 */
   color: #f4f4f4;
   margin: 0;
   padding: 0;
@@ -30,7 +30,7 @@
 
 .title {
   font-size: 48px;
-  color: #119a16; /* 제목 글씨색 */
+  color: #119a16; 
   margin: 0;
   font-weight: bold;
 }
@@ -57,7 +57,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   padding: 15px;
-  background-color: #666; 
+  background-color: #0c0000; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
 }
@@ -73,9 +73,8 @@
   color: #0a0000; 
 }
 
-/* 새로운 Navbar 스타일 */
 .navbar {
-  background-color: #444; /* Navbar 배경 */
+  background-color: #0a0000; /* Navbar 배경 */
   color: #f4f4f4;
   padding: 15px 20px;
   text-align: left;
