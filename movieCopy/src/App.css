@@ -1,0 +1,122 @@
+/* 기존 스타일 */
+.App {
+  font-family: 'Arial', sans-serif;
+  background-color: #333; /* 전체 페이지 배경 검정색 */
+  color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.app-header {
+  background-color: #000; /* 맨 위 칸 배경 검정색 */
+  padding: 40px 20px;
+  text-align: left;
+}
+
+.header-content {
+  display: flex; 
+  justify-content: left; 
+  align-items: left; 
+  gap: 10px;
+  background-color: #000; /* 헤더 콘텐츠 배경 */
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  margin-left: 20px; 
+}
+
+.title {
+  font-size: 48px;
+  color: #119a16; /* 제목 글씨색 */
+  margin: 0;
+  font-weight: bold;
+}
+
+.underline {
+  border-bottom: 1px solid #1f2102; 
+  padding-bottom: 5px; 
+}
+
+.logo {
+  width: 120px; 
+  height: auto;
+  margin-right: 10px; 
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #cee5f0; /* 부제목 색상 */
+  margin-top: 10px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 15px;
+  background-color: #666; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.info {
+  text-align: left;
+  margin-right: 30px;
+}
+
+.info p {
+  margin: 0 0 5px 0;
+  font-size: 13px;
+  color: #0a0000; 
+}
+
+/* 새로운 Navbar 스타일 */
+.navbar {
+  background-color: #444; /* Navbar 배경 */
+  color: #f4f4f4;
+  padding: 15px 20px;
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Sidebar와 main-content를 가로로 배치하는 컨테이너 */
+.content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebar 스타일 */
+.sidebar {
+  width: 220px;
+  background-color: #222; /* Sidebar 배경 */
+  padding: 20px;
+  color: #f4f4f4;
+  font-size: 16px;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 영화 목록의 메인 섹션 */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #080000; /* 메인 배경색 */
+  overflow-y: auto;
+}
+
+/* 푸터 스타일 */
+.app-footer {
+  background-color: #666666; /* 푸터 배경 */
+  padding: 20px;
+  text-align: center;
+  color: #f4f4f4; /* 푸터 글씨색 */
+}
+
+.app-footer p {
+  margin: 0;
+  font-size: 14px;
+}

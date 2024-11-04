@@ -1,0 +1,7 @@
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 45px;
+  gap: 45px;
+  justify-content:left;
+}
