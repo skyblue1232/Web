@@ -37,6 +37,10 @@ const Sidebar = () => {
     setIsMovieDropdownOpen(false);
   };
 
+  const goToCategory = () => {
+    navigate("/category");
+  };
+
   return (
     <aside 
       className={`sidebar ${isVisible ? 'visible' : ''}`} 
@@ -65,7 +69,7 @@ const Sidebar = () => {
         onMouseEnter={toggleMovieDropdown}
         onMouseLeave={closeMovieDropdown}
       >
-        <button className="movie-btn">🎬 영화</button>
+        <button className="movie-btn" onClick={goToCategory}>🎬 영화</button>
         {isMovieDropdownOpen && (
           <div className="movie-dropdown">
             <Link to="/recommended"><button>추천 영화</button></Link>

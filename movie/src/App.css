@@ -1,3 +1,11 @@
+html, body {
+  background-color: #000; /* 페이지 전체 배경을 검정색으로 설정 */
+  color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  height: 100%; /* 페이지 전체 높이 */
+}
+
 /* 기존 스타일 */
 .App {
   font-family: 'Arial', sans-serif;
@@ -113,9 +121,14 @@
   padding: 20px;
   text-align: center;
   color: #f4f4f4; /* 푸터 글씨색 */
+  position: fixed; /* 화면 하단에 고정 */
+  bottom: 0; /* 하단에 위치 */
+  left: 0; /* 화면의 왼쪽 끝부터 시작 */
+  width: 100%; /* 화면 너비에 맞춰 확장 */
 }
 
 .app-footer p {
   margin: 0;
   font-size: 14px;
 }
+

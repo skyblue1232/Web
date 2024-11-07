@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MovieCard from '../MovieCard/MovieCard';
 import * as S from './Styles'; 
 
-const MovieList = ({ category }) => {
+const MovieList = ({ category, isCircular = false }) => { // isCircular prop 추가
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,7 +18,7 @@ const MovieList = ({ category }) => {
 
       // 요청 URL 설정
       const url = `https://api.themoviedb.org/3/movie/${selectedCategory}?language=ko-KR`;
-      console.log("Fetching movies from:", url); // 요청 URL 출력
+      console.log("Fetching movies from:", url);
 
       try {
         const response = await fetch(url, {
@@ -29,17 +29,13 @@ const MovieList = ({ category }) => {
           },
         });
 
-        console.log("Response Status:", response.status);
-
         if (!response.ok) {
           throw new Error(`Failed to fetch movies: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log('Movie data:', data);
         setMovies(data.results || []);
       } catch (error) {
-        console.error('Error fetching movies:', error);
         setError(error.message);
         setMovies([]);
       } finally {
@@ -57,7 +53,9 @@ const MovieList = ({ category }) => {
       ) : error ? (
         <S.Message>Error: {error}</S.Message>
       ) : movies.length > 0 ? (
-        movies.map((movie) => <MovieCard key={movie.id} movie={movie} />)
+        movies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} isCircular={isCircular} /> // isCircular 전달
+        ))
       ) : (
         <S.Message>No movies found.</S.Message>
       )}

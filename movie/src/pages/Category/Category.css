@@ -1,0 +1,26 @@
+.category-page {
+  text-align: center;
+}
+
+.category-images {
+  display: flex;
+  flex-direction: row; /* 가로 방향 정렬 */
+  justify-content: center; /* 중앙 정렬 */
+  gap: 10px; /* 이미지 간격 */
+}
+
+.image-wrapper {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%; /* 동그라미 모양 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -3,9 +3,13 @@ import './SignupModal.css';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Input from '../components/Input'; // 분리한 Input 컴포넌트 import
+import Input from '../components/Input'; // 분리한 Input 컴포넌트 
+import api from '../api'; // axios 설정 파일 
+import { useNavigate } from 'react-router-dom';
 
 const SignupModal = ({ closeModal }) => {
+  const navigate = useNavigate();
+
   // 유효성 검사 스키마 정의
   const schema = yup.object().shape({
     email: yup.string().email('유효한 이메일 주소를 입력하세요.').required('이메일 주소는 필수 입력 항목입니다.'),
@@ -33,10 +37,21 @@ const SignupModal = ({ closeModal }) => {
     };
   }, []);
 
-  // 폼 제출 시 처리 함수
-  const onSubmit = (data) => {
-    console.log('회원가입 데이터 제출:', data);
-    closeModal(); // 회원가입 완료 후 모달 닫기
+  // 폼 제출 시 처리 함수 - 서버에 API 요청 보내기
+  const onSubmit = async (data) => {
+    try {
+      const response = await api.post('/auth/register', {
+        email: data.email,
+        password: data.password,
+        passwordCheck: data.confirmPassword, // password와 확인 비밀번호
+        birthdate: data.birthdate,
+        gender: data.gender,
+      });
+      console.log('회원가입 성공:', response.data);
+      navigate('/login');
+    } catch (error) {
+      console.error('회원가입 실패:', error.response?.data || error.message);
+    }
   };
 
   return (
@@ -49,7 +64,7 @@ const SignupModal = ({ closeModal }) => {
           {/* 이메일 입력 필드 */}
           <Input 
             type="email" 
-            placeholder="이메일 주소를 넣으시오" 
+            placeholder="이메일 주소를 입력하세요" 
             register={register("email")} 
             error={errors.email}
           />
