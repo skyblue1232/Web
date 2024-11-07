@@ -11,8 +11,9 @@ import SignupModal from './pages/SignupModal';
 import CategoryPage from './pages/Category/Category';
 import Nowplaying from './pages/Nowplaying/Nowplaying';
 import Popular from './pages/Popular/Popular';
-import Latest_good from './pages/Latest_good/Latest_good';
+import LatestGood from './pages/LatestGood/LatestGood';
 import Upcomming from './pages/Upcomming/Upcomming';
+import Search from './pages/Search/Search';
 import './App.css';
 
 function App() {
@@ -41,11 +42,12 @@ function App() {
               <Route path="/category" element={<CategoryPage />} />
               <Route path="/nowplaying" element={<Nowplaying />} />
               <Route path="/popular" element={<Popular />} />
-              <Route path="/latest_good" element={<Latest_good />} />
+              <Route path="/latestGood" element={<LatestGood />} />
               <Route path="/upcomming" element={<Upcomming />} />
               <Route path="/recommended" element={<RecommendedMovies />} />
               <Route path="/latest" element={<LatestMovies />} />
               <Route path="/theater" element={<TheaterMovies />} />
+              <Route path="/search" element={<Search />} />
 
               <Route
                 path="/login"
