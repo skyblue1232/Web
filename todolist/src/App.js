@@ -1,42 +1,27 @@
-import React, { useState } from "react";
+import React from 'react';
 import './App.css';
 import Button from './Button';
 import Input from './Input';
+import { TodoProvider, useTodoContext } from './TodoContext';
 
-function App() {
-  const [할일들, 할일들변경] = useState([]);
-  const [입력값, 입력값변경] = useState("");
-  const [수정중, 수정중변경] = useState(null);
-  const [수정값, 수정값변경] = useState("");
-
-  const 할일추가 = () => {
-    if (입력값.trim() === "") return;
-    할일들변경([...할일들, 입력값]);
-    입력값변경("");
-  };
-
-  const 할일삭제 = (인덱스) => {
-    const 새로운할일들 = 할일들.filter((_, i) => i !== 인덱스);
-    할일들변경(새로운할일들);
-  };
-
-  const 수정버튼 = (인덱스) => {
-    수정중변경(인덱스);
-    수정값변경(할일들[인덱스]);
-  };
-
-  const 수정완료 = (인덱스) => {
-    const 새로운할일들 = [...할일들];
-    새로운할일들[인덱스] = 수정값;
-    할일들변경(새로운할일들);
-    수정중변경(null);
-    수정값변경("");
-  };
+const TodoList = () => {
+  const {
+    할일들,
+    입력값,
+    수정중,
+    수정값,
+    할일추가,
+    할일삭제,
+    수정버튼,
+    수정완료,
+    입력값변경,
+    수정값변경,
+    수정중변경, 
+  } = useTodoContext();
 
   return (
     <div className="todo-container">
       <h1>할 일 목록</h1>
-      
       <div className="input-container">
         <Input
           value={입력값}
@@ -73,6 +58,14 @@ function App() {
         ))}
       </ul>
     </div>
+  );
+};
+
+function App() {
+  return (
+    <TodoProvider>
+      <TodoList />
+    </TodoProvider>
   );
 }
 
