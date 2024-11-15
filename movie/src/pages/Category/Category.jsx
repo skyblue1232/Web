@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Category.css'; // CSS 파일을 import
+import './Category.css'; 
 
 const CategoryPage = () => {
   return (
@@ -17,7 +17,7 @@ const CategoryPage = () => {
             <img src="/images/popular_image.jpg" alt="카테고리 2" />
           </div>
         </Link>
-        <Link to="/latest_good">
+        <Link to="/latestGood">
           <div className="image-wrapper">
             <img src="/images/latest_ham.jpg" alt="카테고리 3" />
           </div>

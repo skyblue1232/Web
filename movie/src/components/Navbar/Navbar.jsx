@@ -3,15 +3,15 @@ import './Navbar.css';
 import LoginModal from '../../pages/LoginModal';
 import SignupModal from '../../pages/SignupModal';
 import api from '../../api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
-  const [userInfo, setUserInfo] = useState(null); // 유저 정보 상태
+  const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // 유저 정보 불러오기 함수
   const fetchUserInfo = async () => {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
@@ -20,7 +20,7 @@ const Navbar = () => {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
         const email = response.data.email;
-        const nickname = email.split('@')[0]; // 이메일 앞부분을 닉네임으로 사용
+        const nickname = email.split('@')[0]; 
         setUserInfo(nickname);
       } catch (error) {
         console.error('유저 정보 불러오기 실패:', error);
@@ -52,20 +52,36 @@ const Navbar = () => {
     navigate('/');
   };
 
+  // 현재 위치가 '/user-details'인지 확인
+  const isUserDetailsPage = location.pathname === '/account';
+
   return (
     <nav className="navbar">
       <img src="/umc_logo.png" className="logo" alt="UMC Logo" />
 
       <div className="auth-buttons">
-        {userInfo ? (
+        {isUserDetailsPage ? (
           <>
-            <span className="user-info">안녕하세요, {userInfo}님</span>
+            <button className="back-btn" onClick={() => navigate('/')}>홈으로</button>
             <button className="logout-btn" onClick={handleLogout}>로그아웃</button>
           </>
         ) : (
+          // 기본 상태에서 표시되는 버튼들
           <>
-            <button className="login-btn" onClick={openLoginModal}>로그인</button>
-            <button className="signup-btn" onClick={openSignupModal}>회원가입</button>
+            {userInfo ? (
+              <>
+                <span className="user-info">안녕하세요, {userInfo}님</span>
+                <button className="user-details-btn" onClick={() => navigate('/account')}>
+                  상세 정보
+                </button>
+                <button className="logout-btn" onClick={handleLogout}>로그아웃</button>
+              </>
+            ) : (
+              <>
+                <button className="login-btn" onClick={openLoginModal}>로그인</button>
+                <button className="signup-btn" onClick={openSignupModal}>회원가입</button>
+              </>
+            )}
           </>
         )}
       </div>
