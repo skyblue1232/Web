@@ -15,9 +15,10 @@ export const Message = styled.p`
 `;
 
 export const LoadMoreContainer = styled.div`
-  grid-column: 1 / -1 // 첫 번째부터 마지막까지 전체 열을 차지.
+  grid-column: 1 / -1; /* 첫 번째부터 마지막까지 전체 열을 차지 */
   display: flex;
-  justify-content: start;
+  justify-content: center;
+  align-items: center;
   padding-bottom: 40px; 
   margin: 20px 0 20px 10px; /* top right bottom left */
 `;
@@ -25,6 +26,7 @@ export const LoadMoreContainer = styled.div`
 export const LoadMoreButton = styled.button`
   padding: 10px 20px;
   margin-bottom: 10px;
+  margin-right: 10px;
   font-size: 16px;
   background-color: #009843;
   color: white;
@@ -41,4 +43,10 @@ export const LoadMoreButton = styled.button`
     background-color: #ccc;
     cursor: not-allowed;
   }
+`;
+
+export const PageIndicator = styled.span`
+  font-size: 16px;
+  color: #666;
+  margin: 0 10px;
 `;
