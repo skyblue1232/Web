@@ -1,13 +1,13 @@
 const BASE_URL = 'https://api.themoviedb.org/3';
 const BEARER_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YjJkOTcxODM4OWY5MDliZmZlODk2ZGU4ZDZiZTg1ZCIsIm5iZiI6MTczMTYwNTI4Mi45NTIyNDQzLCJzdWIiOiI2NzFiMTA5NjQ1NDJlMzcxZmUwYTcwNWYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.2T2ejp_isi3G21fdpQfxCEO5jkZTkJh7kGZZgwzAJlI';
 
-export const fetchMoviesByCategory = async (category) => {
+export const fetchMoviesByCategory = async (category, page = 1) => {
   const validCategories = ['now_playing', 'popular', 'upcoming', 'top_rated'];
   if (!validCategories.includes(category)) {
     throw new Error(`Invalid category: ${category}`);
   }
 
-  const url = `${BASE_URL}/movie/${category}?language=en-US&page=1`;
+  const url = `${BASE_URL}/movie/${category}?language=en-US&page=${page}`;
 
   const response = await fetch(url, {
     method: 'GET',
@@ -23,6 +23,5 @@ export const fetchMoviesByCategory = async (category) => {
 
   const data = await response.json();
   console.log('Fetched data:', data); 
-  return data.results || [];
+  return data;
 };
-

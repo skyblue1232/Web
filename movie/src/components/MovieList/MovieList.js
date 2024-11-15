@@ -1,15 +1,27 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import MovieCard from '../MovieCard/MovieCard';
 import Skeleton from '../Skeleton/Skeleton';
 import * as S from './Styles';
-import { fetchMoviesByCategory } from '../../api/movies'; 
+import { fetchMoviesByCategory } from '../../api/movies';
+import LoginSpinner from '../LoginSpinner';
 
 const MovieList = ({ category, isCircular = false }) => {
-  const { data: movies = [], isLoading, error } = useQuery({
-    queryKey: ['movies', category],               
-    queryFn: () => fetchMoviesByCategory(category), 
-    staleTime: 5 * 60 * 1000                       
+  const {
+    data,
+    isLoading,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['movies', category],
+    queryFn: ({ pageParam = 1 }) => fetchMoviesByCategory(category, pageParam),
+    getNextPageParam: (lastPage, allPages) => {
+      // 데이터가 더 있을 경우 다음 페이지로 이동
+      return lastPage.page < lastPage.total_pages ? lastPage.page + 1 : undefined;
+    },
+    staleTime: 5 * 60 * 1000,
   });
 
   return (
@@ -23,12 +35,22 @@ const MovieList = ({ category, isCircular = false }) => {
         </>
       ) : error ? (
         <S.Message>Error: {error.message}</S.Message>
-      ) : movies.length > 0 ? (
-        movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} isCircular={isCircular} /> 
-        ))
+      ) : data && data.pages ? (
+        data.pages
+          .flatMap(page => page.results || [])
+          .map((movie) => (
+            <MovieCard key={movie.id} movie={movie} isCircular={isCircular} />
+          ))
       ) : (
         <S.Message>No movies found.</S.Message>
+      )}
+      {hasNextPage && (
+        <S.LoadMoreContainer>
+          <S.LoadMoreButton onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
+            {isFetchingNextPage ? 'Loading more...' : 'Load More'}
+          </S.LoadMoreButton>
+          {isFetchingNextPage && <LoginSpinner />}
+        </S.LoadMoreContainer>
       )}
     </S.MovieListContainer>
   );
