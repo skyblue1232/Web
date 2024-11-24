@@ -213,7 +213,7 @@ export const TodoProvider = ({ children }) => {
         선택된항목삭제,
         loading,
         error,
-      }}
+      }} 
     >
       {children}
     </TodoContext.Provider>

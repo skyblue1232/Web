@@ -39,7 +39,7 @@ const TodoDetail = () => {
         setUpdatedContent(currentTodo.content);
       }
     }
-  }, [id]);
+  }, [id]); 
 
   const handleSearch = debounce((value) => {
     setSearchTitle(value); // 검색어 상태 업데이트

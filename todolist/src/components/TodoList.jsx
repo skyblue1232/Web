@@ -24,7 +24,7 @@ const TodoList = () => {
   } = useTodoContext();
 
   const 할일추가 = () => {
-    const newTodo = {
+    const newTodo = { 
       id: Date.now(),
       title: 제목값,
       content: 내용값,
