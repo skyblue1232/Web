@@ -15,6 +15,12 @@ import LatestGood from './pages/LatestGood/LatestGood';
 import Upcomming from './pages/Upcomming/Upcomming';
 import Search from './pages/Search/Search';
 import UserDetailPage from './pages/UserDetailPage/UserDetailPage';
+import Recommend from './pages/Recommend/Recommend.jsx';
+import WatchaDiscovery from './pages/WatchaDiscovery/WatchaDiscovery';
+import KoreaMovies from './pages/KoreaMovies/KoreaMovies';
+import AnimationMovies from './pages/AnimationMovies/AnimationMovies';
+import AdultContent from './pages/AdultContent/AdultContent';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fetchCurrentUserInfo } from './api/userApi';
 import './App.css';
@@ -61,7 +67,7 @@ function App() {
             <Sidebar />
             <main className="main-content">
               <Routes>
-                <Route path="/" element={<MovieList />} />
+                <Route path="/" element={<MovieList Navigate to="recommend"/>} />
                 <Route path="/category" element={<CategoryPage />} />
                 <Route path="/nowplaying" element={<Nowplaying />} />
                 <Route path="/popular" element={<Popular />} />
@@ -71,6 +77,10 @@ function App() {
                 <Route path="/latest" element={<LatestMovies />} />
                 <Route path="/theater" element={<TheaterMovies />} />
                 <Route path="/search" element={<Search />} />
+                <Route path="/recommend" element={<Recommend />} />
+                <Route path="/watcha-discovery" element={<WatchaDiscovery />} />
+                <Route path="/korea" element={<KoreaMovies />} />
+                <Route path="/animation" element={<AnimationMovies />} />
                 <Route
                   path="/account"
                   element={<UserDetailPage accountId={accountId} />}
@@ -85,7 +95,21 @@ function App() {
                 <Route
                   path="/signup"
                   element={
-                    isSignedUp ? <Navigate to="/" /> : <SignupModal closeModal={handleSignup} />
+                    isSignedUp ? <Navigate to="/login" /> : <SignupModal closeModal={handleSignup} />
+                  }
+                />
+                <Route
+                  path="/adult"
+                  element={
+                    isLoggedIn ? (
+                      <AdultContent />
+                    ) : (
+                      <div>
+                        <h2>성인 인증이 필요합니다.</h2>
+                        <p>로그인하고 인증하기</p>
+                        <button onClick={() => setIsLoggedIn(true)}>로그인</button>
+                      </div>
+                    )
                   }
                 />
               </Routes>

@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Input from '../components/Input'; // 분리한 Input 컴포넌트 
 import api from '../api'; // axios 설정 파일 
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 
 const SignupModal = ({ closeModal }) => {
   const navigate = useNavigate();
@@ -29,6 +30,20 @@ const SignupModal = ({ closeModal }) => {
     resolver: yupResolver(schema),
   });
 
+  // 회원가입 Mutation 설정
+  const signupMutation = useMutation({
+    mutationFn: (data) => api.post('/auth/register', data),
+    onSuccess: (response) => {
+      console.log('회원가입 성공', response.data);
+      closeModal();
+      console.log('회원가입 상태 업데이트 완료');
+      navigate('/login');
+    },
+    onError: (error) => {
+      console.error('회원가입 실패:', error.response?.data || error.message);
+    },
+  });
+
   // 모달이 열릴 때 body 스크롤 방지 설정
   useEffect(() => {
     document.body.classList.add('modal-open');
@@ -37,21 +52,16 @@ const SignupModal = ({ closeModal }) => {
     };
   }, []);
 
-  // 폼 제출 시 처리 함수 - 서버에 API 요청 보내기
-  const onSubmit = async (data) => {
-    try {
-      const response = await api.post('/auth/register', {
-        email: data.email,
-        password: data.password,
-        passwordCheck: data.confirmPassword, // password와 확인 비밀번호
-        birthdate: data.birthdate,
-        gender: data.gender,
-      });
-      console.log('회원가입 성공:', response.data);
-      navigate('/login');
-    } catch (error) {
-      console.error('회원가입 실패:', error.response?.data || error.message);
-    }
+  // 폼 제출 시 처리 함수
+  const onSubmit = (data) => {
+    const { email, password, confirmPassword, birthdate, gender } = data;
+    signupMutation.mutate({
+      email,
+      password,
+      passwordCheck: confirmPassword, // API 요구사항에 따라 추가
+      birthdate,
+      gender,
+    });
   };
 
   return (

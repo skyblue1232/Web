@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import api from '../api';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 
 const LoginModal = ({ onLogin, closeModal }) => {
   const navigate = useNavigate();
@@ -20,9 +21,10 @@ const LoginModal = ({ onLogin, closeModal }) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data) => {
-    try {
-      const response = await api.post('/auth/login', data);
+  // 로그인 Mutation 설정
+  const loginMutation = useMutation({
+    mutationFn: (data) => api.post('/auth/login', data),
+    onSuccess: (response) => {
       const { accessToken, refreshToken } = response.data;
 
       // 토큰을 localStorage에 저장
@@ -31,12 +33,18 @@ const LoginModal = ({ onLogin, closeModal }) => {
 
       console.log('로그인 성공:', response.data);
       onLogin(); // 로그인 상태 변경
-      navigate(''); // 로그인 후 메인 페이지로 이동
-    } catch (error) {
+      navigate('/'); // 로그인 후 메인 페이지로 이동
+    },
+    onError: (error) => {
       console.error('로그인 실패:', error.response?.data || error.message);
-    }
-  };
+    },
+  });
 
+  // 폼 제출 처리 함수
+  const onSubmit = (data) => {
+    loginMutation.mutate(data);
+  };
+  
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -52,7 +60,9 @@ const LoginModal = ({ onLogin, closeModal }) => {
             {errors.password && <p className="error-message">{errors.password.message}</p>}
           </div>
 
-          <button type="submit" className="login-btn">로그인</button>
+          <button type="submit" className="login-btn" disabled={loginMutation.isLoading}>
+            {loginMutation.isLoading ? '로그인 중...' : '로그인'}
+          </button>
         </form>
       </div>
     </div>
