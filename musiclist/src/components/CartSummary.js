@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearCart, calculateTotals } from '../features/cartSlice';
+import { calculateTotals } from '../features/cartSlice';
+import { openModal } from '../features/modalSlice';
 import { useEffect } from 'react';
 
 const CartSummary = () => {
@@ -19,7 +20,7 @@ const CartSummary = () => {
         <h2>Cart Summary</h2>
         <p>Total Items: {totalAmount}</p>
         <p>Total Price: ₩{totalPrice}</p>
-        <ClearButton onClick={() => dispatch(clearCart())}>Clear Cart</ClearButton>
+        <ClearButton onClick={() => dispatch(openModal())}>Clear Cart</ClearButton>
       </SummaryDetails>
     </SummaryContainer>
   );

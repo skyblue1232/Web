@@ -5,12 +5,14 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import NotFound from './pages/NotFound';
 import styled from 'styled-components';
+import Modal from './components/Modal';
 
 const App = () => {
   return (
     <Router>
       <GlobalStyle />
       <AppContainer>
+        <Modal />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
