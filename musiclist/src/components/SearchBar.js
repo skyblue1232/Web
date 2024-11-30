@@ -1,19 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateSearchQuery, applySearch } from '../features/cartSlice';
+import useCartStore from '../features/cartSlice';
 
 const SearchBar = () => {
-  const dispatch = useDispatch();
-  const searchQuery = useSelector((state) => state.cart.searchQuery);
+  const { searchQuery, updateSearchQuery, applySearch } = useCartStore();
 
   const handleInputChange = (e) => {
-    dispatch(updateSearchQuery(e.target.value));
+    updateSearchQuery(e.target.value);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      dispatch(applySearch());
+      applySearch();
     }
   };
 

@@ -1,18 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { calculateTotals } from '../features/cartSlice';
-import { openModal } from '../features/modalSlice';
-import { useEffect } from 'react';
+import useCartStore from '../features/cartSlice'; // Redux 대신 Zustand 사용
+import useModalStore from '../features/modalSlice';
 
 const CartSummary = () => {
-  const { totalAmount, totalPrice } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
+  const { totalAmount, totalPrice, calculateTotals } = useCartStore();
+  const { openModal } = useModalStore();
 
   useEffect(() => {
-    dispatch(calculateTotals());
-    console.log('[Component] Calculated Totals:', { totalAmount, totalPrice });
-  }, [dispatch, totalAmount, totalPrice]);
+    calculateTotals();
+  }, [calculateTotals]);
 
   return (
     <SummaryContainer>
@@ -20,7 +17,7 @@ const CartSummary = () => {
         <h2>Cart Summary</h2>
         <p>Total Items: {totalAmount}</p>
         <p>Total Price: ₩{totalPrice}</p>
-        <ClearButton onClick={() => dispatch(openModal())}>Clear Cart</ClearButton>
+        <ClearButton onClick={openModal}>Clear Cart</ClearButton>
       </SummaryDetails>
     </SummaryContainer>
   );

@@ -1,24 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { increase, decrease, calculateTotals } from '../features/cartSlice';
+import useCartStore from '../features/cartSlice';
 
 const CartItem = ({ id, title, singer, price, img }) => {
-  const dispatch = useDispatch();
+  const { items, increase, decrease, calculateTotals } = useCartStore();
 
-  // Redux 상태에서 해당 음반의 amount를 가져옴
-  const amount = useSelector((state) =>
-    state.cart.items.find((item) => item.id === id)?.amount || 0
-  );
+  const amount = items.find((item) => item.id === id)?.amount || 0;
 
   const handleIncrease = () => {
-    dispatch(increase(id));
-    dispatch(calculateTotals());
+    increase(id);
+    calculateTotals();
+    console.log('[Zustand] Updated State:', useCartStore.getState());
   };
 
   const handleDecrease = () => {
-    dispatch(decrease(id));
-    dispatch(calculateTotals());
+    if (amount > 1) {
+      decrease(id); // 수량 감소
+      calculateTotals(); // 총합 계산
+      console.log('[Zustand] Updated State:', useCartStore.getState());
+    } else {
+      console.log(`[Zustand] Cannot decrease. Minimum amount reached for ${id}`);
+    }
   };
 
   return (

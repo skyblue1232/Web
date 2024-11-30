@@ -1,29 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../features/modalSlice';
-import { clearCart } from '../features/cartSlice';
+import useModalStore from '../features/modalSlice';
+import useCartStore from '../features/cartSlice';
 
 const Modal = () => {
-  const { isOpen } = useSelector((state) => state.modal);
-  const dispatch = useDispatch();
+  const { isOpen, closeModal } = useModalStore();
+  const clearCart = useCartStore((state) => state.clearCart);
+  const items = useCartStore((state) => state.items);
 
   if (!isOpen) return null;
+
+  const handleClearCart = () => {
+    console.log('[Zustand] Current Cart Items Before Clear:', items); // 상태 출력 (비우기 전)
+    clearCart(); // 장바구니 비우기
+    console.log('[Zustand] Cart Cleared. Current Items:', []); // 상태 출력 (비운 후)
+    closeModal(); // 모달 닫기
+  };
 
   return (
     <ModalOverlay>
       <ModalContent>
         <h2>※ 정말로 장바구니를 비우시겠습니까?</h2>
         <ButtonContainer>
-          <ModalButton
+        <ModalButton onClick={handleClearCart}>Yes</ModalButton>
+          <ModalButton 
             onClick={() => {
-              dispatch(clearCart());
-              dispatch(closeModal());
+              closeModal();
+              console.log('[Zustand] Modal Closed');
             }}
-          >
-            Yes
-          </ModalButton>
-          <ModalButton onClick={() => dispatch(closeModal())}>No</ModalButton>
+          >No</ModalButton>
         </ButtonContainer>
       </ModalContent>
     </ModalOverlay>

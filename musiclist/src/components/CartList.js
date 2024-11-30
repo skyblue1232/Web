@@ -1,14 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import useCartStore from '../features/cartSlice';
 import CartItem from './CartItem';
 
 const CartList = () => {
-  const filteredItems = useSelector((state) => state.cart.filteredItems); // Redux 상태에서 가져오기
-  const items = useSelector((state) => state.cart.items);
+  const { items, filteredItems } = useCartStore();
 
-  console.log('[Component] Rendered CartList:', { items, filteredItems });
-  
   if (items.length === 0) {
     return (
       <ListContainer>
@@ -20,8 +17,7 @@ const CartList = () => {
   return (
     <ListContainer>
       {filteredItems.length > 0 ? (
-        filteredItems.map((item) => 
-        <CartItem key={item.id} {...item} />)
+        filteredItems.map((item) => <CartItem key={item.id} {...item} />)
       ) : (
         <NoResults>검색 결과가 없습니다.</NoResults>
       )}

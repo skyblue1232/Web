@@ -1,80 +1,64 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { create } from 'zustand';
 import cartItems from '../constants/cartItems';
 
-const initialState = {
+const useCartStore = create((set) => ({
+  // 초기 상태
   items: cartItems,
   totalAmount: 0,
   totalPrice: 0,
   searchQuery: '',
   filteredItems: cartItems,
-};
 
-const cartSlice = createSlice({
-  name: 'cart',
-  initialState,
-  reducers: {
-    // 수량 증가
-    increase: (state, action) => {
-      const index = state.items.findIndex((item) => item.id === action.payload);
-      if (index !== -1) {
-        state.items[index].amount += 1;
-      }
-    },
-
-    // 수량 감소
-    decrease: (state, action) => {
-      const index = state.items.findIndex((item) => item.id === action.payload);
-      if (index !== -1) {
-        if (state.items[index].amount > 1) {
-          state.items[index].amount -= 1;
-        }
-      }
-    },
-
-    // 장바구니 초기화
-    clearCart: (state) => {
-      state.items = [];
-      state.totalAmount = 0;
-      state.totalPrice = 0;
-    },
-
-    // 총합 계산
-    calculateTotals: (state) => {
-      let totalAmount = 0;
-      let totalPrice = 0;
-
-      state.items.forEach((item) => {
-        totalAmount += item.amount;
-        totalPrice += item.amount * item.price;
-      });
-
-      state.totalAmount = totalAmount;
-      state.totalPrice = totalPrice;
-    },
-
-    // 검색 쿼리 업데이트
-    updateSearchQuery: (state, action) => {
-      state.searchQuery = action.payload;
-      const query = action.payload.toLowerCase();
-
-      state.filteredItems = state.items.filter(
-        (item) =>
-          item.title.toLowerCase().includes(query) ||
-          item.singer.toLowerCase().includes(query) ||
-          item.price.toString().startsWith(query)
+  // Actions
+  increase: (id) =>
+    set((state) => {
+      const updatedItems = state.items.map((item) =>
+        item.id === id ? { ...item, amount: item.amount + 1 } : item
       );
+      return { items: updatedItems };
+    }),
 
-      console.log(`[Redux] Updated search query to "${action.payload}"`, state.filteredItems);
-    },
+  decrease: (id) =>
+    set((state) => {
+      const updatedItems = state.items.map((item) =>
+        item.id === id && item.amount > 1
+          ? { ...item, amount: item.amount - 1 }
+          : item
+      );
+      return { items: updatedItems };
+    }),
 
-    // 검색 결과 적용
-    applySearch: (state) => {
-      state.items = state.filteredItems;
-      console.log('[Redux] Applied search filter', state.items);
-    },
-  },
-});
+  clearCart: () =>
+    set(() => ({
+      items: [],
+      totalAmount: 0,
+      totalPrice: 0,
+    })),
 
-export const { increase, decrease, clearCart, calculateTotals, updateSearchQuery, applySearch } =
-  cartSlice.actions;
-export default cartSlice.reducer;
+  calculateTotals: () =>
+    set((state) => {
+      const totalAmount = state.items.reduce((sum, item) => sum + item.amount, 0);
+      const totalPrice = state.items.reduce((sum, item) => sum + item.amount * item.price, 0);
+      return { totalAmount, totalPrice };
+    }),
+
+  updateSearchQuery: (query) =>
+    set((state) => {
+      const lowerQuery = query.toLowerCase();
+      const filteredItems = state.items.filter(
+        (item) =>
+          item.title.toLowerCase().includes(lowerQuery) ||
+          item.singer.toLowerCase().includes(lowerQuery) ||
+          item.price.toString().startsWith(lowerQuery)
+      );
+      return { searchQuery: query, filteredItems };
+    }),
+
+  applySearch: () =>
+    set((state) => {
+      console.log('[Zustand] Search Results:', state.filteredItems);
+      return {};
+    }),
+}));
+
+export default useCartStore;

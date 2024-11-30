@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchBar from './SearchBar';
 import { CartIcon } from '../constants/icons';
-import { useSelector } from 'react-redux';
+import useCartStore from '../features/cartSlice'; // Zustand store import
 
 const Header = () => {
-  const totalAmount = useSelector((state) => state.cart.totalAmount);
+  const totalAmount = useCartStore((state) => state.totalAmount); // Zustand 상태 사용
 
-  console.log('[Component] Header rendered with totalAmount:', totalAmount);
-  
+  console.log('totalAmount:', totalAmount);
+
   return (
     <HeaderContainer>
       <Logo>UUUMC PlayList</Logo>

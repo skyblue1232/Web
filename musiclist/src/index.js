@@ -17,17 +17,13 @@
 // reportWebVitals();
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
 import App from './App';
-import store from './app/store';
-
-console.log('[App] Initial State:', store.getState());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={store}>
+  <React.StrictMode>
     <App />
-  </Provider>
+  </React.StrictMode>
 );
 
 
