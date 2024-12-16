@@ -14,5 +14,8 @@
     "styled-components": "^6.1.13",
     "web-vitals": "^4.2.4",
     "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/react-slick": "^0.23.13"
   }
 }
